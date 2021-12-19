@@ -1,5 +1,5 @@
 import unittest
-import re
+
 from morse import Morse 
 
 class TestMorse(unittest.TestCase):
@@ -7,7 +7,6 @@ class TestMorse(unittest.TestCase):
         self.assertEqual(Morse('a'), "Wrong Character")
         self.assertEqual(Morse(6), "Wrong Character")
         self.assertEqual(Morse('.-'), "a")
-        
 
 
 if __name__ == "__main__":

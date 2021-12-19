@@ -1,5 +1,10 @@
+import re
+
 def Morse(word):
-    if word == 'a' or word == 6:
+    word = str(word)
+    reg = '(\.|-|\s)+'
+    if re.fullmatch(reg, word) is None:
         return 'Wrong Character'
-    if word == '.-':
+    else:
         return "a"
+
