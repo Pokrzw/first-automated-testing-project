@@ -26,7 +26,7 @@ class Test_CheckLetterCode(unittest.TestCase):
     def test_read_H(self):
         self.assertEqual(CheckLetterCode('H'), '....')    
     def test_SPACE(self):
-        self.assertEqual(CheckLetterCode(" "),'     ')
+        self.assertEqual(CheckLetterCode(" "),'   ')
     def test_ERR_ASTERISK(self):
         self.assertEqual(CheckLetterCode('*'), 'Cannot translate this symbol')
 
@@ -68,11 +68,24 @@ class TestMorseDecode(unittest.TestCase):
     def test_MorseDecode_correct_ALA_MA_KOTA(self):
         self.assertEqual(MorseDecode('.- .-.. .-     -- .-     -.- --- - .-'), "ALA MA KOTA")
 
+class TestMorseCode(unittest.TestCase):
+    def test_MorseCode_incorrect_imput(self):
+        self.assertEqual(MorseCode('.-'),"Cannot translate this word")
+    def test_MorseCode_correct_letter_A(self):
+        self.assertEqual(MorseCode('A'), '.-')
+    def test_MorseCode_correct_letters_AB(self):
+        self.assertEqual(MorseCode('AB'), '.- -...')
+    def test_MorseCode_correct_letters_with_space_AB_CD(self):
+        self.assertEqual(MorseCode('AB CD'), '.- -...     -.-. -..')
+
 class TestMorse(unittest.TestCase):
-    def test_CheckLetterDecode(self):
-        pass    
-        
-
-
+    def test_wrong_option(self):
+        self.assertEqual(Morse('SLOWO','Zla opcja'), "Wrong option")
+    def test_decode(self):
+        self.assertEqual(Morse('.-','decode'),'A')
+    def test_code(self):
+        self.assertEqual(Morse("HELLO WORLD", 'code'), '.... . .-.. .-.. ---     .-- --- .-. .-.. -..')
+    def test_code_no_option(self):
+        self.assertEqual(Morse("ALA MA KOTA"),'.- .-.. .-     -- .-     -.- --- - .-')
 if __name__ == "__main__":
     unittest.main()

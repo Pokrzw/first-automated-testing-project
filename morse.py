@@ -26,7 +26,7 @@ def CheckLetterCode(letter):
         if letter == key:
             return MORSE_CODE_DICT[key]
     if letter == " ": 
-        return "     "
+        return "   "
     else:
         return 'Cannot translate this symbol'
 
@@ -45,14 +45,13 @@ def CheckRegexCode(word):
     return True 
 
 def MorseDecode(word):
-    if CheckRegexDecode(word) == False:
+    if CheckRegexDecode(word) is False:
         return "Wrong Expression"
     else:
         final_result, cur_letter = "", ""
         iterator, space_count = 0, 0
         for character in word:
             iterator += 1
-            print(character)
             if character!=" " and space_count>1 and space_count!=5:
                 return "Incorrect word"
             if space_count == 5:
@@ -60,12 +59,10 @@ def MorseDecode(word):
                     space_count = 0
             if character == " ":
                 space_count += 1
-                print(cur_letter)
                 if CheckLetterDecode(cur_letter) != 'No such letter in Morse code':
                     final_result += CheckLetterDecode(cur_letter)
                     cur_letter = '' 
             else:
-                print(cur_letter)
                 space_count = 0
                 cur_letter += character
                 if iterator == len(word):
@@ -76,3 +73,20 @@ def MorseDecode(word):
         return final_result
 
 
+def MorseCode(word):
+    if CheckRegexCode(word) is False:
+        return "Cannot translate this word"
+    else:
+        final_result = ""
+        for letter in word:
+            final_result += CheckLetterCode(letter) 
+            final_result += ' '
+    return final_result[:-1]
+
+def Morse(word, option="code"):
+    if option=="decode":
+        return MorseDecode(word)
+    elif option=="code":
+        return MorseCode(word)
+    else:
+        return "Wrong option"
