@@ -1,7 +1,7 @@
 import re
 
 
-CEASAR_DICT = {
+CAESAR_DICT = {
     "A": "0",
     "B": "1",
     "C": "2",
@@ -30,7 +30,15 @@ CEASAR_DICT = {
     "Z": "25",
 }
 
-
+def SearchLetterCode(letter):
+    keys, vals = list(CAESAR_DICT.keys()), list(CAESAR_DICT.values())
+    for key in CAESAR_DICT:
+        if key == letter:
+            i = int(CAESAR_DICT[key]) + 3
+            if i>25:
+                i = (i % 25) - 1
+            return keys[vals.index(str(i))]
+    return 'Cannot translate this symbol'
 
 def CheckRegex(code):
     reg = '^[A-Z]*$'
@@ -39,7 +47,12 @@ def CheckRegex(code):
     return True
 
 def DecodeCaesar(code):
-    if code=='LOREm':
-        return 'Wrong input (only upper case letters)'
+    if CheckRegex(code) is not True:
+        return CheckRegex(code)
     else:
-        return 'YHQL'
+        result = ""
+        for letter in code:
+            result += SearchLetterCode(letter)
+        return result
+    
+    
