@@ -46,7 +46,7 @@ def CheckRegex(code):
         return 'Wrong input (only upper case letters)'
     return True
 
-def DecodeCaesar(code):
+def CodeCaesar(code):
     if CheckRegex(code) is not True:
         return CheckRegex(code)
     else:
@@ -55,4 +55,29 @@ def DecodeCaesar(code):
             result += SearchLetterCode(letter)
         return result
     
+def SearchLetterDecode(letter):
+    keys, vals = list(CAESAR_DICT.keys()), list(CAESAR_DICT.values())
+    for key in CAESAR_DICT:
+        if key == letter:
+            i = int(CAESAR_DICT[key]) - 3
+            if i < 0:
+                i =  25 - int(CAESAR_DICT[key])
+                
+            return keys[vals.index(str(i))]
+    return 'Cannot translate this symbol'
     
+def DecodeCaesar(code):
+    if CheckRegex(code) is not True:
+        return CheckRegex(code)
+    else:
+        result = ""
+        for letter in code:
+            result += SearchLetterDecode(letter)
+        return result
+
+def Caesar(code, action = "code"):
+    if action is "code" or action is None:
+        return CodeCaesar(code)
+    if action is "decode":
+        return DecodeCaesar(code)
+    return 'Wrong action'
