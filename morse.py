@@ -1,10 +1,78 @@
 import re
+MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
+                    'C':'-.-.', 'D':'-..', 'E':'.',
+                    'F':'..-.', 'G':'--.', 'H':'....',
+                    'I':'..', 'J':'.---', 'K':'-.-',
+                    'L':'.-..', 'M':'--', 'N':'-.',
+                    'O':'---', 'P':'.--.', 'Q':'--.-',
+                    'R':'.-.', 'S':'...', 'T':'-',
+                    'U':'..-', 'V':'...-', 'W':'.--',
+                    'X':'-..-', 'Y':'-.--', 'Z':'--..',
+                    '1':'.----', '2':'..---', '3':'...--',
+                    '4':'....-', '5':'.....', '6':'-....',
+                    '7':'--...', '8':'---..', '9':'----.',
+                    '0':'-----'}
+def CheckLetterDecode(letter):
+    for key in MORSE_CODE_DICT:
+        if letter == MORSE_CODE_DICT[key]:
+            return key
+    if letter == " ": 
+        return ""
+    else:
+        return 'No such letter in Morse code'
 
-def Morse(word):
+def CheckLetterCode(letter):
+    for key in MORSE_CODE_DICT:
+        if letter == key:
+            return MORSE_CODE_DICT[key]
+    if letter == " ": 
+        return "     "
+    else:
+        return 'Cannot translate this symbol'
+
+def CheckRegexDecode(word):
     word = str(word)
     reg = '(\.|-|\s)+'
     if re.fullmatch(reg, word) is None:
-        return 'Wrong Character'
+          return False
+    return True 
+
+def CheckRegexCode(word):
+    word = str(word)
+    reg = '^[A-Z0-9|\s]*$'
+    if re.fullmatch(reg, word) is None:
+          return False
+    return True 
+
+def MorseDecode(word):
+    if CheckRegexDecode(word) == False:
+        return "Wrong Expression"
     else:
-        return "a"
+        final_result, cur_letter = "", ""
+        iterator, space_count = 0, 0
+        for character in word:
+            iterator += 1
+            print(character)
+            if character!=" " and space_count>1 and space_count!=5:
+                return "Incorrect word"
+            if space_count == 5:
+                    final_result += " "  
+                    space_count = 0
+            if character == " ":
+                space_count += 1
+                print(cur_letter)
+                if CheckLetterDecode(cur_letter) != 'No such letter in Morse code':
+                    final_result += CheckLetterDecode(cur_letter)
+                    cur_letter = '' 
+            else:
+                print(cur_letter)
+                space_count = 0
+                cur_letter += character
+                if iterator == len(word):
+                    if CheckLetterDecode(cur_letter) != 'No such letter in Morse code':
+                        final_result += CheckLetterDecode(cur_letter)
+                    else:
+                        return CheckLetterDecode(cur_letter)
+        return final_result
+
 
