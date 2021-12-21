@@ -57,5 +57,6 @@ class TestCaesar(unittest.TestCase):
         self.assertEqual(Caesar('VENI'), 'YHQL')
     def test_wrong_action(self):
         self.assertEqual(Caesar('YHQL', 'clean my room'), 'Wrong action')    
+
 if __name__ == "__main__":
     unittest.main()
