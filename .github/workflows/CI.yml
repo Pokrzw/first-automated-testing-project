@@ -26,4 +26,3 @@ jobs:
       run: | 
         python test_morse.py
         python test_cezar.py
-        python test_aficzny.py
