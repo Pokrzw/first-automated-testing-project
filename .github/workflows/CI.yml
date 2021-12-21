@@ -12,10 +12,10 @@ on:
   workflow_dispatch:
 
 jobs:
+
   build:
 
-    runs-on: ubuntu-latest
-
+    runs-on: buntu-18.04
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.10
