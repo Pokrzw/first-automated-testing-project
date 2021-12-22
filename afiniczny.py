@@ -1,7 +1,12 @@
 import re
 from cezar import *
+from doctest import testmod
 
 def ModifyCode(letter_val, a = 1, b = 1):
+    '''
+    >>> ModifyCode(21, 3, 12)
+    23
+    '''
     code = ( a * int(letter_val) + b ) % 26
     return code 
 
@@ -26,6 +31,10 @@ def SearchLetterDecode(letter, a = 1, b = 1):
         return result
 
 def mnozenie(a):
+     '''
+    >>> mnozenie(23)
+    17
+    '''
     result = 1
     for i in range(1, 26):
         if (a * i) % 26 == 1:
@@ -54,3 +63,6 @@ def DecodeAfiniczny(word, a=1, b=1):
         for letter in word:
             result += SearchLetterDecode(letter, a, b)
         return result
+
+if __name__ == '__main__':
+    testmod(name ='Afiniczny', verbose = True)

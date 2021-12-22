@@ -1,5 +1,5 @@
 import re
-
+from doctest import testmod
 
 CAESAR_DICT = {
     "A": "0",
@@ -31,6 +31,15 @@ CAESAR_DICT = {
 }
 
 def SearchLetterCode(letter):
+    '''
+    >>> SearchLetterCode("VENI")
+    'Cannot translate this symbol'
+    '''
+
+    '''
+    >>> SearchLetterCode("V")
+    'Y'
+    '''
     keys, vals = list(CAESAR_DICT.keys()), list(CAESAR_DICT.values())
     for key in CAESAR_DICT:
         if key == letter:
@@ -76,8 +85,20 @@ def DecodeCaesar(code):
         return result
 
 def Caesar(code, action = "code"):
+    '''
+    >>> Caesar("VENI")
+    'YHQL'
+    '''
+
+    '''
+    >>> Caesar("YHQL", 'decode')
+    'VENI'
+    '''
     if action is "code" or action is None:
         return CodeCaesar(code)
     if action is "decode":
         return DecodeCaesar(code)
     return 'Wrong action'
+
+if __name__ == '__main__':
+    testmod(name ='Cezar', verbose = True)

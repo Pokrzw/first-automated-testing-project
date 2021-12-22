@@ -1,4 +1,6 @@
 import re
+from doctest import testmod
+
 MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
                     'C':'-.-.', 'D':'-..', 'E':'.',
                     'F':'..-.', 'G':'--.', 'H':'....',
@@ -12,7 +14,12 @@ MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
                     '4':'....-', '5':'.....', '6':'-....',
                     '7':'--...', '8':'---..', '9':'----.',
                     '0':'-----'}
+
 def CheckLetterDecode(letter):
+    '''
+    >>> CheckLetterDecode("--...")
+    '7'
+    '''
     for key in MORSE_CODE_DICT:
         if letter == MORSE_CODE_DICT[key]:
             return key
@@ -45,6 +52,13 @@ def CheckRegexCode(word):
     return True 
 
 def MorseDecode(word):
+    '''
+    >>> MorseDecode("ABC")
+    'Wrong Expression'
+    
+    >>> MorseDecode(".- .-")
+    'AA'
+    '''
     if CheckRegexDecode(word) is False:
         return "Wrong Expression"
     else:
@@ -84,9 +98,18 @@ def MorseCode(word):
     return final_result[:-1]
 
 def Morse(word, option="code"):
+    '''
+    >>> Morse(".-", "decode")
+    'A'
+    >>> Morse("HELLO WORLD", 'code')
+    '.... . .-.. .-.. ---     .-- --- .-. .-.. -..'
+    '''
     if option=="decode":
         return MorseDecode(word)
     elif option=="code":
         return MorseCode(word)
     else:
         return "Wrong option"
+
+if __name__ == '__main__':
+    testmod(name ='Morse', verbose = True)
