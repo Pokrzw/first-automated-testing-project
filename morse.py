@@ -14,7 +14,8 @@ MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
                     '1':'.----', '2':'..---', '3':'...--',
                     '4':'....-', '5':'.....', '6':'-....',
                     '7':'--...', '8':'---..', '9':'----.',
-                    '0':'-----'}
+                    '0':'-----', '?':'..--..', '!':'-.-.--', 
+                    '.':'.-.-.-', ',':'--..--', ';':'---...'}
 
 def CheckLetterDecode(letter):
     '''
@@ -47,7 +48,7 @@ def CheckRegexDecode(word):
 
 def CheckRegexCode(word):
     word = str(word)
-    reg = '^[A-Z0-9|\s]*$'
+    reg = '^[A-Z0-9|.|,|!|?|;|:|\s]*$'
     if re.fullmatch(reg, word) is None:
           return False
     return True 

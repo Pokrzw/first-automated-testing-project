@@ -7,6 +7,7 @@ from custom_matcher import eq_to_True
 from assertpy import *
 import pytest
 import nose2
+from nose2.tools import params
 
 
 class TestCodeRegex(unittest.TestCase):
@@ -27,19 +28,17 @@ class TestCaesarCode(unittest.TestCase):
         assert_that(CodeCaesar('VENI')).is_equal_to('YHQL')
 
 class TestSearchLetterCode(unittest.TestCase):
-    def test_CheckLetterCode_bad_input_SPECIAL_CHAR(self):
-        self.assertEqual(SearchLetterCode('/'),'Cannot translate this symbol')
-    def test_CheckLetterCode_bad_input_LOWERCASE(self):
-        self.assertEqual(SearchLetterCode('a'),'Cannot translate this symbol')
-    def test_CheckLetterCode_normal_case(self):
-        self.assertEqual(SearchLetterCode('V'),'Y')
-    def test_CheckLetterCode_A(self):
-        self.assertEqual(SearchLetterCode('X'),'A')    
-    def test_CheckLetterCode_B(self):
-        self.assertEqual(SearchLetterCode('Y'),'B')    
-    def test_CheckLetterCode_C(self):
-        self.assertEqual(SearchLetterCode('Z'),'C')
-
+    @params(
+        ('/','Cannot translate this symbol'),
+        ('a','Cannot translate this symbol'),
+        ('V','Y'),
+        ('X','A') ,
+        ('Y','B'),
+        ('Z','C')
+    )
+    def test_CheckLetterCode(self,a,b):
+        assert SearchLetterCode(a) == b
+        
 class TestSearchLetterDecode(unittest.TestCase):
     def test_CheckLetterDecode_bad_input_SPECIAL_CHAR(self):
         self.assertEqual(SearchLetterDecode('/'),'Cannot translate this symbol')

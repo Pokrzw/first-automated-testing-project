@@ -3,7 +3,8 @@ from afiniczny import *
 from hamcrest import *
 from assertpy import *
 import pytest
-import nose2
+
+
 
 class TestModifyCode(unittest.TestCase):
     def test_ModifyCode_correct_V(self):

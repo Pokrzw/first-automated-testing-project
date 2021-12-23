@@ -5,9 +5,8 @@ from exceptions import *
 from hamcrest import *
 from assertpy import * 
 import pytest
-import nose2
+from nose2.tools import params
 
-#assert_that(theBiscuit, equal_to(myBiscuit))
 class Test_CheckLetterDecode(unittest.TestCase):
     def test_read_A(self):
         assert_that(CheckLetterDecode('.-'), equal_to('A'))
@@ -55,11 +54,12 @@ class Test_CheckRegexCode(unittest.TestCase):
     def test_correct_input_number(self):
         self.assertEqual(CheckRegexCode(123), True)
     def test_correct_input_number_and_letter(self):
-        self.assertEqual(CheckRegexCode('ABC 123'), True)
+        self.assertEqual(CheckRegexCode('ABC! 123?'), True)
     def test_incorrect_imput_dot(self):
-        self.assertEqual(CheckRegexCode("."), False)
+        self.assertEqual(CheckRegexCode("."), True)
     def test_incorrect_imput_dash(self):
         self.assertEqual(CheckRegexCode('-'), False)
+
 
 class TestMorseDecode(unittest.TestCase):
     def test_MorseDecode_incorrect_input(self):
@@ -74,6 +74,8 @@ class TestMorseDecode(unittest.TestCase):
         self.assertEqual(MorseDecode('.- .-'), "AA")
     def test_MorseDecode_correct_ALA_MA_KOTA(self):
         self.assertEqual(MorseDecode('.- .-.. .-     -- .-     -.- --- - .-'), "ALA MA KOTA")
+    def test_MorseDecode_correct_special(self):
+        assert_that(MorseDecode('.- -... -.-. -.-.--     .---- --..-- ..--- ...--')).is_equal_to('ABC! 1,23')
 
 class TestMorseCode(unittest.TestCase):
     def test_MorseCode_incorrect_imput(self):
@@ -84,6 +86,8 @@ class TestMorseCode(unittest.TestCase):
         self.assertEqual(MorseCode('AB'), '.- -...')
     def test_MorseCode_correct_letters_with_space_AB_CD(self):
         self.assertEqual(MorseCode('AB CD'), '.- -...     -.-. -..')
+    def test_MorseCode_correct_interpunction(self):
+        assert_that(MorseCode('ABC! 1,23')).is_equal_to('.- -... -.-. -.-.--     .---- --..-- ..--- ...--')
 
 class TestMorse(unittest.TestCase):
     def test_morse_wrong_option(self):
@@ -99,7 +103,5 @@ class TestMorse(unittest.TestCase):
         assert_that(Morse("HELLO WORLD", 'code')).is_equal_to('.... . .-.. .-.. ---     .-- --- .-. .-.. -..')
     def test_code_no_option(self):
         self.assertEqual(Morse("ALA MA KOTA"),'.- .-.. .-     -- .-     -.- --- - .-')
-if __name__ == "__main__":
-    import nose2
-    nose2.main()
+if __name__ == "__main__":    
     unittest.main()
