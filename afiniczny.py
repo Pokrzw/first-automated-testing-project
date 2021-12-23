@@ -18,7 +18,7 @@ def SearchLetterCode(letter, a = 1, b = 1):
 
 def SearchLetterDecode(letter, a = 1, b = 1):
     if type(a)!=int or type(b)!=int:
-        return "Not a number"
+        raise TypeError
     else:
         keys, vals = list(CAESAR_DICT.keys()), list(CAESAR_DICT.values())
         letter_index = keys.index(letter)
@@ -31,7 +31,7 @@ def SearchLetterDecode(letter, a = 1, b = 1):
         return result
 
 def mnozenie(a):
-     '''
+    '''
     >>> mnozenie(23)
     17
     '''
@@ -46,7 +46,7 @@ def CodeAfiniczny(word, a=1, b=1):
     if CheckRegex(word) is not True:
         return CheckRegex(word)
     if type(a)!=int or type(b)!=int:
-        return "Not a number"
+        raise TypeError
     else:
         result = ""
         for letter in word:
@@ -57,7 +57,7 @@ def DecodeAfiniczny(word, a=1, b=1):
     if CheckRegex(word) is not True:
         return CheckRegex(word)
     if type(a)!=int or type(b)!=int:
-        return "Not a number"
+        raise TypeError
     else:
         result = ""
         for letter in word:

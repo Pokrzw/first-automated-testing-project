@@ -1,5 +1,6 @@
 import re
 from doctest import testmod
+from exceptions import *
 
 CAESAR_DICT = {
     "A": "0",
@@ -52,7 +53,8 @@ def SearchLetterCode(letter):
 def CheckRegex(code):
     reg = '^[A-Z]*$'
     if re.fullmatch(reg, code) is None:
-        return 'Wrong input (only upper case letters)'
+        raise TypeError
+        #return 'Wrong input (only upper case letters)'
     return True
 
 def CodeCaesar(code):
@@ -98,7 +100,7 @@ def Caesar(code, action = "code"):
         return CodeCaesar(code)
     if action is "decode":
         return DecodeCaesar(code)
-    return 'Wrong action'
+    raise CezarWrongOption
 
 if __name__ == '__main__':
     testmod(name ='Cezar', verbose = True)

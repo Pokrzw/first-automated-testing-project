@@ -1,5 +1,6 @@
 import re
 from doctest import testmod
+from exceptions import *
 
 MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
                     'C':'-.-.', 'D':'-..', 'E':'.',
@@ -109,7 +110,7 @@ def Morse(word, option="code"):
     elif option=="code":
         return MorseCode(word)
     else:
-        return "Wrong option"
+        raise MorseWrongOption
 
 if __name__ == '__main__':
     testmod(name ='Morse', verbose = True)

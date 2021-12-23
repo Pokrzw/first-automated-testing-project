@@ -1,18 +1,22 @@
 import unittest
 import re
 from cezar import *
+from exceptions import *
 
 class TestCodeRegex(unittest.TestCase):
     def test_wrong_string_UPPERCASE(self):
-        self.assertEqual(CheckRegex('lorem'),'Wrong input (only upper case letters)')
+        with self.assertRaises(TypeError):
+            CheckRegex('lorem')
     def test_wrong_string_NUMBER(self):
-        self.assertEqual(CheckRegex('123'),'Wrong input (only upper case letters)')
+        with self.assertRaises(TypeError):
+            CheckRegex('123')
     def test_right_string_LOWERCASE(self):
         self.assertEqual(CheckRegex('LOREM'), True)
 
 class TestCaesarCode(unittest.TestCase):
     def test_wrong_input(self):
-        self.assertEqual(CodeCaesar('LOREm'), 'Wrong input (only upper case letters)')
+        with self.assertRaises(TypeError):
+            CodeCaesar('LOREm')
     def test_correct_input(self):
         self.assertEqual(CodeCaesar('VENI'), 'YHQL')
 
@@ -44,7 +48,8 @@ class TestSearchLetterDecode(unittest.TestCase):
 
 class TestDecodeCaesar(unittest.TestCase):
     def test_wrong_input(self):
-        self.assertEqual(DecodeCaesar('LOREm'), 'Wrong input (only upper case letters)')
+        with self.assertRaises(TypeError):
+            DecodeCaesar('LOREm')
     def test_correct_input(self):
         self.assertEqual(DecodeCaesar('YHQL'), 'VENI')
 
@@ -56,7 +61,8 @@ class TestCaesar(unittest.TestCase):
     def test_code_no_args(self):
         self.assertEqual(Caesar('VENI'), 'YHQL')
     def test_wrong_action(self):
-        self.assertEqual(Caesar('YHQL', 'clean my room'), 'Wrong action')    
+        with self.assertRaises(CezarWrongOption):
+            Caesar('YHQL', 'clean my room')    
 
 if __name__ == "__main__":
     unittest.main()

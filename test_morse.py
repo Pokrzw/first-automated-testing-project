@@ -1,6 +1,8 @@
 import unittest
 import re
 from morse import *
+from exceptions import *
+
 
 class Test_CheckLetterDecode(unittest.TestCase):
     def test_read_A(self):
@@ -79,8 +81,9 @@ class TestMorseCode(unittest.TestCase):
         self.assertEqual(MorseCode('AB CD'), '.- -...     -.-. -..')
 
 class TestMorse(unittest.TestCase):
-    def test_wrong_option(self):
-        self.assertEqual(Morse('SLOWO','Zla opcja'), "Wrong option")
+    def test_morse_wrong_option(self):
+        with self.assertRaises(MorseWrongOption):
+            Morse('SLOWO','Zla opcja')
     def test_decode(self):
         self.assertEqual(Morse('.-','decode'),'A')
     def test_code(self):
