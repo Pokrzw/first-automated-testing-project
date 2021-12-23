@@ -3,7 +3,7 @@ import re
 from cezar import *
 from exceptions import *
 from hamcrest import *
-from custom_matcher import eq_to_True
+from custom_matcher import eq_to_VENI
 from assertpy import *
 import pytest
 import nose2
@@ -45,18 +45,18 @@ class TestSearchLetterDecode(unittest.TestCase):
     def test_CheckLetterDecode_Y(self):
         self.assertEqual(SearchLetterDecode('Y'),'V')
     def test_CheckLetterDecode_A(self):
-        self.assertEqual(SearchLetterDecode('A'),'Z')    
+        assert_that(SearchLetterDecode('A')).contains_only('Z')    
     def test_CheckLetterDecode_B(self):
-        self.assertEqual(SearchLetterDecode('B'),'Y')    
+        assert_that(SearchLetterDecode('B')).is_equal_to_ignoring_case('Y')    
     def test_CheckLetterDecode_C(self):
-        self.assertEqual(SearchLetterDecode('C'),'X')
+        assert_that(SearchLetterDecode('C')).is_alpha()
 
 class TestDecodeCaesar(unittest.TestCase):
     def test_wrong_input(self):
         with self.assertRaises(TypeError):
             DecodeCaesar('LOREm')
-    def test_correct_input(self):
-        self.assertEqual(DecodeCaesar('YHQL'), 'VENI')
+    def test_correct_input_YHQL(self):
+        assert_that(DecodeCaesar('YHQL'), is_(eq_to_VENI()))
 
 class TestCaesar(unittest.TestCase):
     def test_decode(self):
