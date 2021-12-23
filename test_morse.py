@@ -2,11 +2,15 @@ import unittest
 import re
 from morse import *
 from exceptions import *
+from hamcrest import *
+from assertpy import * 
+import pytest
+import nose2
 
-
+#assert_that(theBiscuit, equal_to(myBiscuit))
 class Test_CheckLetterDecode(unittest.TestCase):
     def test_read_A(self):
-        self.assertEqual(CheckLetterDecode('.-'), 'A')
+        assert_that(CheckLetterDecode('.-'), equal_to('A'))
     def test_read_T(self):
         self.assertEqual(CheckLetterDecode('-'), 'T')
     def test_read_H(self):
@@ -20,17 +24,18 @@ class Test_CheckLetterDecode(unittest.TestCase):
     def test_ONE_SPACE(self):
         self.assertEqual(CheckLetterDecode(' '), '')
 
-class Test_CheckLetterCode(unittest.TestCase):
-    def test_read_A(self):
-        self.assertEqual(CheckLetterCode('A'), '.-')
-    def test_read_T(self):
-        self.assertEqual(CheckLetterCode('T'), '-')
-    def test_read_H(self):
-        self.assertEqual(CheckLetterCode('H'), '....')    
-    def test_SPACE(self):
-        self.assertEqual(CheckLetterCode(" "),'   ')
-    def test_ERR_ASTERISK(self):
-        self.assertEqual(CheckLetterCode('*'), 'Cannot translate this symbol')
+@pytest.mark.parametrize(
+    ('letter', 'result'),
+    (
+        ('A', '.-'),
+        ('T', '-'),
+        ('H', '....'),
+        (" ",'   '),
+        ('*', 'Cannot translate this symbol')
+    )
+)
+def test_CheckLetterCode(letter, result):
+    assert CheckLetterCode(letter) == result
 
 class Test_CheckRegexDecode(unittest.TestCase):
     def test_correct_input_no_spaces(self):
@@ -84,11 +89,17 @@ class TestMorse(unittest.TestCase):
     def test_morse_wrong_option(self):
         with self.assertRaises(MorseWrongOption):
             Morse('SLOWO','Zla opcja')
+    def test_decode_regex(self):
+        assert_that(Morse('.-','decode')).matches('^[A-Z0-9|\s]*$')
     def test_decode(self):
         self.assertEqual(Morse('.-','decode'),'A')
+    def test_code_regex(self):
+        assert_that(Morse("HELLO WORLD", 'code')).matches('(\.|-|\s)+')
     def test_code(self):
-        self.assertEqual(Morse("HELLO WORLD", 'code'), '.... . .-.. .-.. ---     .-- --- .-. .-.. -..')
+        assert_that(Morse("HELLO WORLD", 'code')).is_equal_to('.... . .-.. .-.. ---     .-- --- .-. .-.. -..')
     def test_code_no_option(self):
         self.assertEqual(Morse("ALA MA KOTA"),'.- .-.. .-     -- .-     -.- --- - .-')
 if __name__ == "__main__":
+    import nose2
+    nose2.main()
     unittest.main()

@@ -4,3 +4,4 @@ class MorseWrongOption(Exception):
 class CezarWrongOption(Exception):
     pass
 
+  
