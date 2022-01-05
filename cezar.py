@@ -31,14 +31,14 @@ CAESAR_DICT = {
     "Z": "25",
 }
 
-def SearchLetterCode(letter):
+def SearchLetterCodeCaesar(letter):
     '''
-    >>> SearchLetterCode("VENI")
+    >>> SearchLetterCodeCaesar("VENI")
     'Cannot translate this symbol'
     '''
 
     '''
-    >>> SearchLetterCode("V")
+    >>> SearchLetterCodeCaesar("V")
     'Y'
     '''
     keys, vals = list(CAESAR_DICT.keys()), list(CAESAR_DICT.values())
@@ -63,7 +63,7 @@ def CodeCaesar(code):
     else:
         result = ""
         for letter in code:
-            result += SearchLetterCode(letter)
+            result += SearchLetterCodeCaesar(letter)
         return result
     
 def SearchLetterDecode(letter):

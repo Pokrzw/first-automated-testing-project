@@ -1,4 +1,5 @@
 __pycache__
-.coverage
-htmlcov
+test_morse.py
+test_cezar.py
+test_afiniczny.py
 .pytest_cache
