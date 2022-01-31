@@ -2,7 +2,7 @@ Przed wlaczeniem testow trzeba pamietac o zainstalowaniu bibliotek assertpy, cov
 
 **Wlaczanie testow z verbose**
 >pytest -v
-![pytest -v](https://i.imgur.com/kfuZbM7.mp4)
+![pytest -v](https://i.imgur.com/rIJFVX2.gif)
 
 **Sprawdzanie pokrycia kodu**
 >pytest --cov=.
