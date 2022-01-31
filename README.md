@@ -2,13 +2,13 @@ Przed wlaczeniem testow trzeba pamietac o zainstalowaniu bibliotek assertpy, cov
 
 **Wlaczanie testow z verbose**
 >pytest -v
-![](https://imgur.com/kfuZbM7)
+![pytest -v](https://i.imgur.com/kfuZbM7.mp4)
 
 **Sprawdzanie pokrycia kodu**
 >pytest --cov=.
-![](https://imgur.com/ddShJyD)
+![pytest --cov=.](https://i.imgur.com/ddShJyD.gif)
 
 **Generowanie pliku HTML z pokryciem kodu**
 >coverage html
-![](https://imgur.com/IWcB4ly)
+![coverage html](https://i.imgur.com/IWcB4ly.gif)
 
